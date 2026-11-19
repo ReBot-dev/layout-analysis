@@ -113,9 +113,9 @@ impl Counts {
     pub fn model(&self) -> Model {
         let p = |k: u64, n: usize| k as f64 / self.total(n) as f64;
         let mut uni = Vec::new();
-        for a in 0..NCHAR {
-            if self.uni[a] > 0 {
-                uni.push((a, p(self.uni[a], 1)));
+        for (a, &k) in self.uni.iter().enumerate() {
+            if k > 0 {
+                uni.push((a, p(k, 1)));
             }
         }
         let mut bi = Vec::new();

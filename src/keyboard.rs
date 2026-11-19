@@ -146,10 +146,11 @@ impl CostTables {
         let home = home_distance(&keys);
         let n = keys.len();
 
-        let mut c1 = vec![0.0; n];
-        for s in 0..n {
-            c1[s] = params.weight(keys[s].finger) * home[s];
-        }
+        let c1: Vec<f64> = keys
+            .iter()
+            .zip(&home)
+            .map(|(k, h)| params.weight(k.finger) * h)
+            .collect();
 
         let mut c2 = vec![0.0; n * n];
         for s1 in 0..NSLOT {
