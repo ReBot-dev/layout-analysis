@@ -1,0 +1,22 @@
+# Cost model parameters. Every key is optional; omitted keys keep the default.
+# Use with: layout-analysis eval --params params.toml <files>
+
+# Row stagger of a standard keyboard (key units)
+top_row_offset = -0.25
+bottom_row_offset = 0.5
+
+# Load weight of each finger
+weight_index = 1.0
+weight_middle = 1.0
+weight_ring = 1.2
+weight_pinky = 1.5
+
+# Bigram costs (pairs containing a space are not counted)
+sfb = 5.0          # same finger, different key: sfb * weight * distance
+scissor = 2.5      # adjacent fingers, top <-> bottom row: scissor + same_hand * distance
+same_hand = 0.4    # other same-hand pairs: same_hand * distance
+alternate = -0.2   # hands alternate (negative = bonus)
+
+# Trigram costs (triples containing a space are not counted)
+sfs = 2.0          # 1st and 3rd key on the same finger: sfs * weight * distance
+redirect = 1.0     # one-hand triple whose finger direction reverses
